@@ -7,11 +7,12 @@ const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const compression = require('compression');
 const cors = require('cors');
 
-const globalErrorHandler = require('./controllers/errorController');
 const AppError = require('./utils/appError');
+const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
@@ -19,6 +20,7 @@ const bookingRouter = require('./routes/bookingRoutes');
 const bookingController = require('./controllers/bookingController');
 const viewRouter = require('./routes/viewRoutes');
 
+// Start express app
 const app = express();
 
 app.enable('trust proxy');
@@ -26,51 +28,56 @@ app.enable('trust proxy');
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
 
-//1. GLOBAL MIDDLEWARES
-//implement cors
+// 1) GLOBAL MIDDLEWARES
+// Implement CORS
 app.use(cors());
 // Access-Control-Allow-Origin *
-app.options('*', cors());
+// api.natours.com, front-end natours.com
+// app.use(cors({
+//   origin: 'https://www.natours.com'
+// }))
 
-// serving static files
+app.options('*', cors());
+// app.options('/api/v1/tours/:id', cors());
+
+// Serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
-//set security http headers
+// Set security HTTP headers
 app.use(helmet());
 
-//log requests in dev env
+// Development logging
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-//limit requests from same api
+// Limit requests from same API
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
   message: 'Too many requests from this IP, please try again in an hour!'
 });
-
 app.use('/api', limiter);
 
+// Stripe webhook, BEFORE body-parser, because stripe needs the body as stream
 app.post(
   '/webhook-checkout',
-  express.raw({ type: 'application/json' }),
+  bodyParser.raw({ type: 'application/json' }),
   bookingController.webhookCheckout
 );
 
-console.log(process.env.NODE_ENV);
-
-//Body parser, reading data from the body in req.body
+// Body parser, reading data from body into req.body
 app.use(express.json({ limit: '10kb' }));
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.use(cookieParser());
-//data sanitization against NoSql query injection
+
+// Data sanitization against NoSQL query injection
 app.use(mongoSanitize());
 
-//data sanitization against XSS (corss site scripting attacks)
+// Data sanitization against XSS
 app.use(xss());
 
-//prevent paramter pollution
+// Prevent parameter pollution
 app.use(
   hpp({
     whitelist: [
@@ -86,17 +93,17 @@ app.use(
 
 app.use(compression());
 
-//test middleware
-// app.use((req, res, next) => {
-//   req.requestTime = new Date().toISOString();
-//   // console.log(req.cookies);
-//   next();
-// });
+// Test middleware
+app.use((req, res, next) => {
+  req.requestTime = new Date().toISOString();
+  // console.log(req.cookies);
+  next();
+});
 
-// 3.ROUTES
+// 3) ROUTES
 
-app.use('/api/v1/users', userRouter);
 app.use('/api/v1/tours', tourRouter);
+app.use('/api/v1/users', userRouter);
 app.use('/api/v1/reviews', reviewRouter);
 app.use('/api/v1/bookings', bookingRouter);
 
@@ -108,12 +115,10 @@ app.use((req, res, next) => {
   next();
 });
 app.use('/', viewRouter);
-
 app.all('*', (req, res, next) => {
-  next(new AppError(`can't find ${req.originalUrl} on this server!`, 404));
+  next(new AppError(`Can't find ${req.originalUrl} on this server!`, 404));
 });
 
-//GLOBAL ERROR HANDLING MIDDLEWARE
 app.use(globalErrorHandler);
 
 module.exports = app;
