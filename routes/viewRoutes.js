@@ -7,12 +7,7 @@ const router = express.Router();
 
 // router.use(authController.isLoggeIn);
 
-router.get(
-  '/',
-  bookingController.createBookingCheckout,
-  authController.isLoggeIn,
-  viewController.getOverview
-);
+router.get('/', authController.isLoggeIn, viewController.getOverview);
 router.get('/tour/:slug', authController.isLoggeIn, viewController.getTour);
 router.get('/login', authController.isLoggeIn, viewController.getLoginForm);
 router.get('/me', authController.protect, viewController.getAccount);
