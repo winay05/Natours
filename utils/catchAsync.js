@@ -3,5 +3,3 @@ module.exports = fn => {
     fn(req, res, next).catch(next);
   };
 };
-
-//wrapper function to warp all the async functions and handle try catch

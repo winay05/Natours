@@ -1,10 +1,8 @@
 /* eslint-disable */
-
 import axios from 'axios';
 import { showAlert } from './alerts';
 
 export const login = async (email, password) => {
-  // console.log(email, password);
   try {
     const res = await axios({
       method: 'POST',
@@ -16,17 +14,14 @@ export const login = async (email, password) => {
     });
 
     if (res.data.status === 'success') {
-      showAlert('success', 'logged in successfully!');
+      showAlert('success', 'Logged in successfully!');
       window.setTimeout(() => {
         location.assign('/');
-      }, 1000);
+      }, 1500);
     }
-
-    console.log(res);
   } catch (err) {
     showAlert('error', err.response.data.message);
   }
-  //
 };
 
 export const logout = async () => {
@@ -35,12 +30,9 @@ export const logout = async () => {
       method: 'GET',
       url: '/api/v1/users/logout'
     });
-
-    if (res.data.status === 'success') {
-      location.reload(true); //imp to mark as true to reload from server and not just browser cache
-    }
+    if ((res.data.status = 'success')) location.reload(true);
   } catch (err) {
     console.log(err.response);
-    showAlert('error', 'Error logging out! Try again');
+    showAlert('error', 'Error logging out! Try again.');
   }
 };

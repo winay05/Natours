@@ -1,7 +1,6 @@
 const express = require('express');
-
-const bookingController = require('../controllers/bookingController');
-const authController = require('../controllers/authController');
+const bookingController = require('./../controllers/bookingController');
+const authController = require('./../controllers/authController');
 
 const router = express.Router();
 
@@ -18,12 +17,8 @@ router
 
 router
   .route('/:id')
+  .get(bookingController.getBooking)
   .patch(bookingController.updateBooking)
-  .delete(bookingController.deleteBooking)
-  .get(bookingController.getBooking);
-
-//spl routes
-// get all bookings for a certain Tour
-// get all booking for a certain User etc can be obtained using query string on the get route itself
+  .delete(bookingController.deleteBooking);
 
 module.exports = router;
