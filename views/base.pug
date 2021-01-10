@@ -1,0 +1,35 @@
+doctype html
+html
+    head
+        //- <meta http-equiv="Content-Security-Policy" content="default-src *;img-src *; script-src 'self' 'unsafe-inline' https://api.mapbox.com/mapbox-gl-js/v2.0.0/mapbox-gl.js">
+        
+        block head
+        meta(charset='UTF-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1.0')
+        //- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src https://fonts.googleapis.com 'self' 'unsafe-inline' ; script-src https://api.mapbox.com https://cdn.jsdelivr.net 'self' 'unsafe-inline' ; script-src-elem 'self' 'unsafe-inline' https://api.mapbox.com https://cdn.jsdelivr.net">
+        link(rel='stylesheet' href='/css/style.css')
+        link(rel='shortcut icon' type='image/png' href='/img/favicon.png')
+        link(rel='stylesheet' href='https://fonts.googleapis.com/css?family=Lato:300,300i,700')
+        
+        title Natours | #{title}
+        
+    body
+        // HEADER
+        include _header
+        
+        
+        // CONTENT
+        block content
+            h1 This is placeholder heading
+        
+        // FOOTER
+        include _footer
+        //- script(src='/js/mapbox.js')
+        //- script(src='/js/login.js')
+        script(src='https://js.stripe.com/v3/')
+
+        script(src='/js/bundle.js')
+        
+        //- <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        
+        
