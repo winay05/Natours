@@ -8,7 +8,8 @@ import { showAlert } from './alerts';
 
 // DOM ELEMENTS
 const mapBox = document.getElementById('map');
-const loginForm = document.querySelector('.form--login');
+const loginForm = document.getElementById('login');
+const signupForm = document.getElementById('signup');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
 const userPasswordForm = document.querySelector('.form-user-password');
@@ -27,6 +28,23 @@ if (loginForm)
     const password = document.getElementById('password').value;
     login(email, password);
   });
+
+if (signupForm) {
+  signupForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    console.log('in signup form');
+    document.querySelector('.btn--signup').textContent = 'Creating...';
+
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const passwordConfirm = document.getElementById('passwordConfirm').value;
+    const password = document.getElementById('password').value;
+    // console.log(email, password);
+    await signup(name, email, password, passwordConfirm);
+
+    document.querySelector('.btn--signup').textContent = 'Signup';
+  });
+}
 
 if (logOutBtn) logOutBtn.addEventListener('click', logout);
 
