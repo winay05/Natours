@@ -32,7 +32,7 @@ if (loginForm)
 if (signupForm) {
   signupForm.addEventListener('submit', async e => {
     e.preventDefault();
-    console.log('in signup form');
+    // console.log('in signup form');
     document.querySelector('.btn--signup').textContent = 'Creating...';
 
     const name = document.getElementById('name').value;
