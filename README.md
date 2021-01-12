@@ -14,6 +14,6 @@ The API used is the Natours API, built and published specifically for this proje
 
 ---
 
-Website published at: [Natours]("https://natours-vinay.herokuapp.com/"){target="_blank"}
+Website published at: [Natours]("https://natours-vinay.herokuapp.com/")
 
-API documentation is available at: [Natours API docs]("https://documenter.getpostman.com/view/13583598/TVzSiwJj"){target="_blank"}
+API documentation is available at: [Natours API docs]("https://documenter.getpostman.com/view/13583598/TVzSiwJj")
