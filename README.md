@@ -8,6 +8,7 @@ Built in **Nodejs** following the MVC architecture with:
 - _stripe_ for handling payments
 - _sendgrid_ to handle mailing
 - _mapbox_ for maps integration
+- _JWT_ for loging users
 - an API to get all the data in the website
 
 The API used is the Natours API, built and published specifically for this project, using **Postman**.
