@@ -1,4 +1,14 @@
-# Natours Application
+# [Natours](https://natours-vinay.herokuapp.com/)
+
+A user can:
+
+- browse the available tours, their start dates, start locations, price and other information.
+- book tours by making payments through the strip checkout gateway.
+- Login/Signup, Reset password, change profile picture and view additional information in thier dashboard.
+
+<img src='./public/img/natours.gif' alt='site demo'>
+
+A backend centric project built to learn **Node.js** development better.
 
 Built in **Nodejs** following the MVC architecture with:
 
@@ -9,8 +19,6 @@ Built in **Nodejs** following the MVC architecture with:
 - _sendgrid_ to handle mailing
 - _mapbox_ for maps integration
 - an API to get all the data in the website
-
-The API used is the Natours API, built and published specifically for this project, using **Postman**.
 
 ---
 
