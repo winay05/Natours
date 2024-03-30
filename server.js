@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+const setupDB = require('./utils/setupDB');
 
 process.on('uncaughtException', err => {
   console.log('UNCAUGHT EXCEPTION! 💥 Shutting down...');
@@ -9,26 +9,6 @@ process.on('uncaughtException', err => {
 
 dotenv.config({ path: './config.env' });
 const app = require('./app');
-
-function setupDB() {
-  // local database
-  let DB = process.env.DATABASE_LOCAL;
-  if (process.env.npm_config_mode === 'PRODUCTION') {
-    // hosted database
-    DB = process.env.DATABASE.replace(
-      '<PASSWORD>',
-      process.env.DATABASE_PASSWORD
-    );
-  }
-
-  mongoose
-    .connect(DB, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useFindAndModify: false
-    })
-    .then(() => console.log('DB connection successful!'));
-}
 
 setupDB();
 
