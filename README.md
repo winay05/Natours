@@ -1,4 +1,4 @@
-# [Natours](https://natours-vinay.herokuapp.com/)
+# Natours
 
 A user can:
 
