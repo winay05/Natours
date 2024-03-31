@@ -1,4 +1,4 @@
-# _Natours_
+# Natours
 
 A user can:
 
