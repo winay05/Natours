@@ -4,24 +4,20 @@ const dotenv = require('dotenv');
 dotenv.config({ path: './config.env' });
 
 module.exports = () => {
-  // local database
-  let DB = process.env.DATABASE_LOCAL;
-  if (process.env.npm_config_mode === 'PRODUCTION') {
-    // hosted database
-    DB = process.env.DATABASE.replace(
-      '<PASSWORD>',
-      process.env.DATABASE_PASSWORD
-    );
+  let DB = process.env.DATABASE.replace(
+    '<password>',
+    process.env.DATABASE_PASSWORD
+  );
+
+  if (process.env.npm_config_mode === 'DEVELOPMENT') {
+    // local database
+    DB = process.env.DATABASE_LOCAL;
   }
 
   mongoose
-    .connect(DB, {
-      useNewUrlParser: true,
-      useCreateIndex: true,
-      useFindAndModify: false
-    })
+    .connect(DB, {})
     .then(
       () => console.log('DB connection successful!'),
-      () => console.log('Failed to connect to DB')
+      err => console.log('Failed to connect to DB:', err)
     );
 };
