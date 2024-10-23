@@ -10,17 +10,22 @@ process.on('uncaughtException', err => {
 dotenv.config({ path: './config.env' });
 const app = require('./app');
 
-setupDB();
-
 //assign port
 const port = process.env.PORT || 3000;
+let server;
 
-//start server
-const server = app.listen(port, () => {
-  console.log(
-    `App running on port ${port}...\nRun mode is ${process.env.NODE_ENV}`
-  );
-});
+setupDB().then(
+  () => {
+    console.log('DB connection successful!');
+    //start server
+    app.listen(port, () => {
+      console.log(
+        `App running on port ${port}...\nRun mode is ${process.env.NODE_ENV}`
+      );
+    });
+  },
+  err => console.log('Failed to connect to DB:', err)
+);
 
 process.on('unhandledRejection', err => {
   console.log('UNHANDLED REJECTION! 💥 Shutting down...');

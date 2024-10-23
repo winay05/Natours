@@ -8,7 +8,7 @@ A user can:
 
 <img src='./public/img/natours.gif' alt='site demo'>
 
-A backend centric project built to learn **Node.js** development better.
+A backend centric project built to learn **Node.js** development.
 
 Built in **Nodejs** following the MVC architecture with:
 
@@ -20,10 +20,12 @@ Built in **Nodejs** following the MVC architecture with:
 - _mapbox_ for maps integration
 - _JWT_ for logging users
 - an API to get all the data in the website
+- docker to containerise application [how to setup in docker](#how-to-setup-in-docker)
 
 ---
 
 ### Interesting features:
+
 - **Advanced Filtering**: Filter tours by duration, ratings, price, etc.
 - **Pagination**: Limit the number of results returned.
 - **Sorting**: Sort tours by price, ratings, etc.
@@ -42,7 +44,23 @@ Built in **Nodejs** following the MVC architecture with:
 - **Error Handling**: Implement error handling for production.
 - **Environment Variables**: Use environment variables to store sensitive data.
 - **Logging**: Implement logging using Winston.(work in progress)
-- **Testing**: Write unit and integration tests using Jest and Supertest.(work in progress)  
+- **Testing**: Write unit and integration tests using Jest and Supertest.(work in progress)
+
+## How to setup in Docker
+
+- Install docker
+- go to the project root dir and run
+  - `npm run build:js` this will build the js bundles required by frontend(can be skipped if you want to play with APIs only)
+  - `npm run build:docker` this will build docker img
+  - `npm run start:dev-docker` this pull the required image and start docker containers in dev mode
+  - if running for the first time, you might want to seed the db with some data, to do this, open the docker shell and run `npm run embedd-data` to import data, `delete-data` to clean all data from db.
+  - the easiest way to open the running container shell is via docker desktop
+    - open containers tab on the left
+    - expand the running `natours` container to reveal the app container, click on it
+    - Click on the `exec` tab to reveal terminal for the running docker container
+
+<br/>
+<br/>
 
 Website published at: [Natours](https://natours-ifw4.onrender.com)
 

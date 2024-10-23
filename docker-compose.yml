@@ -1,0 +1,33 @@
+services:
+  natours-app:
+    image: natours
+    container_name: natours-app
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    environment:
+      NODE_ENV: development
+    env_file:
+      - config.env
+    ports:
+      - 8000:8000
+    develop:
+      watch:
+        - action: sync+restart
+          path: ./**/*.js
+          target: /usr/src/app
+          ignore:
+            - node_modules/
+    volumes:
+      - /Users/vinaykumardahiya/vinay/work/projects/Natours:/usr/src/app
+    depends_on:
+      - mongo
+  mongo:
+    image: mongo
+    container_name: natours-mongo
+    ports:
+      - 27017:27017
+    volumes:
+      - database:/data/db
+volumes:
+  database:
