@@ -14,10 +14,5 @@ module.exports = () => {
     DB = process.env.DATABASE_LOCAL;
   }
 
-  mongoose
-    .connect(DB, {})
-    .then(
-      () => console.log('DB connection successful!'),
-      err => console.log('Failed to connect to DB:', err)
-    );
+  return mongoose.connect(DB);
 };
