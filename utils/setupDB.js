@@ -9,15 +9,10 @@ module.exports = () => {
     process.env.DATABASE_PASSWORD
   );
 
-  if (process.env.npm_config_mode === 'DEVELOPMENT') {
+  if (process.env.NODE_ENV === 'development') {
     // local database
     DB = process.env.DATABASE_LOCAL;
   }
 
-  mongoose
-    .connect(DB, {})
-    .then(
-      () => console.log('DB connection successful!'),
-      err => console.log('Failed to connect to DB:', err)
-    );
+  return mongoose.connect(DB);
 };
