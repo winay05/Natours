@@ -26,6 +26,7 @@ Built in **Nodejs** following the MVC architecture with:
 
 ### Interesting features:
 
+- **Rate Limiting**: rate limit api usage to prevent DDOS.
 - **Advanced Filtering**: Filter tours by duration, ratings, price, etc.
 - **Pagination**: Limit the number of results returned.
 - **Sorting**: Sort tours by price, ratings, etc.
@@ -43,6 +44,8 @@ Built in **Nodejs** following the MVC architecture with:
 - **Security**: Implement security best practices.
 - **Error Handling**: Implement error handling for production.
 - **Environment Variables**: Use environment variables to store sensitive data.
+- **Controller using factory pattern**: Make factory controllers for get, getAll, Update, Delete
+- **Caching layer** using Redis
 - **Logging**: Implement logging using Winston.(work in progress)
 - **Testing**: Write unit and integration tests using Jest and Supertest.(work in progress)
 

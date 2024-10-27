@@ -18,7 +18,7 @@ setupDB().then(
   () => {
     console.log('DB connection successful!');
     //start server
-    app.listen(port, () => {
+    server = app.listen(port, () => {
       console.log(
         `App running on port ${port}...\nRun mode is ${process.env.NODE_ENV}`
       );
