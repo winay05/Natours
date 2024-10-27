@@ -6,6 +6,7 @@
 - [Behind the scenes of, tech breakdown of the project](#tech-breakdown)
 - [Interesting features](#interesting-features)
 - [Future improvements](#possible-improvements)
+
 ## What can a user do:
 
 - browse the available tours, their start dates, start locations, price and other information.
@@ -14,8 +15,7 @@
 
 <img src='./public/img/natours.gif' alt='site demo'>
 
-A backend-centric project built to learn **Node.js** development.
-
+A backend centric project built to learn **Node.js** development.
 
 ## Tech Breakdown
 
@@ -35,6 +35,7 @@ Built with **Nodejs** following the MVC architecture:
 
 ### Interesting features:
 
+- **Rate Limiting**: rate limit api usage to prevent DDOS.
 - **Advanced Filtering**: Filter tours by duration, ratings, price, etc.
 - **Pagination**: Limit the number of results returned.
 - **Sorting**: Sort tours by price, ratings, etc.
@@ -52,8 +53,11 @@ Built with **Nodejs** following the MVC architecture:
 - **Security**: Implement security best practices.
 - **Error Handling**: Implement error handling for production.
 - **Environment Variables**: Use environment variables to store sensitive data.
+- **Controller using factory pattern**: Make factory controllers for get, getAll, Update, Delete
+- **Caching layer** using Redis
 
 ### Possible improvements
+
 - Move content (images, text etc.) to a CMS.
 - Implement logging using Winston or a similar service.
 - Write unit and integration tests.

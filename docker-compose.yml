@@ -29,5 +29,10 @@ services:
       - 27017:27017
     volumes:
       - database:/data/db
+  redis:
+    image: redis:7.4.1-alpine
+    container_name: natours-redis
+    ports:
+      - 6379:6379
 volumes:
   database:

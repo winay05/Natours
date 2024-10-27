@@ -1,6 +1,8 @@
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const APIFeatures = require('./../utils/apiFeatures');
+const { reqToKey } = require('../utils/redisHelper');
+const { readCache, writeCache } = require('./redisController');
 
 exports.deleteOne = Model =>
   catchAsync(async (req, res, next) => {
@@ -67,6 +69,19 @@ exports.getOne = (Model, popOptions) =>
 
 exports.getAll = Model =>
   catchAsync(async (req, res, next) => {
+    const key = reqToKey(req);
+
+    const cachedData = await readCache(key);
+    if (cachedData) {
+      console.log('Cache hit for key:', key);
+      return res.status(200).json({
+        status: 'success',
+        results: cachedData.length,
+        data: {
+          data: cachedData
+        }
+      });
+    }
     // To allow for nested GET reviews on tour (hack)
     let filter = {};
     if (req.params.tourId) filter = { tour: req.params.tourId };
@@ -87,4 +102,6 @@ exports.getAll = Model =>
         data: doc
       }
     });
+
+    writeCache(key, JSON.stringify(doc.map(t => t.toJSON())));
   });
