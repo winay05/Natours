@@ -13,6 +13,7 @@ let redisClient = null;
   }
   if (!REDIS_URL) {
     console.error('No Redis URL found in the environment variables');
+    return;
     // allow to work even without redis
   }
 
