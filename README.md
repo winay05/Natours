@@ -1,6 +1,13 @@
 # [Natours](https://natours-ifw4.onrender.com)
 
-A user can:
+## The objective of making this is to learn, backend development, how a software engineer works (think projects, task boards, branches etc) 🤷
+
+- [What can the user do](#what-can-a-user-do)
+- [Behind the scenes of, tech breakdown of the project](#tech-breakdown)
+- [Interesting features](#interesting-features)
+- [Future improvements](#possible-improvements)
+
+## What can a user do:
 
 - browse the available tours, their start dates, start locations, price and other information.
 - book tours by making payments through the strip checkout gateway.
@@ -10,7 +17,9 @@ A user can:
 
 A backend centric project built to learn **Node.js** development.
 
-Built in **Nodejs** following the MVC architecture with:
+## Tech Breakdown
+
+Built with **Nodejs** following the MVC architecture:
 
 - _express_ backend
 - _mongoDB_ and _mongoose_
@@ -46,10 +55,19 @@ Built in **Nodejs** following the MVC architecture with:
 - **Environment Variables**: Use environment variables to store sensitive data.
 - **Controller using factory pattern**: Make factory controllers for get, getAll, Update, Delete
 - **Caching layer** using Redis
-- **Logging**: Implement logging using Winston.(work in progress)
-- **Testing**: Write unit and integration tests using Jest and Supertest.(work in progress)
 
-## How to setup in Docker
+### Possible improvements
+
+- Move content (images, text etc.) to a CMS.
+- Implement logging using Winston or a similar service.
+- Write unit and integration tests.
+- Setup CI to test codebase on PR level.
+- Move deployment to a combination of Docker Registry(auto build and push, CD)
+- EC2 or a similar compute service to run the deployed solution.
+- Move to/fix problems with payments+ emailing solution
+- Move the frontend to some framework (candidates should have SSG for home & tour pages, SSR for other pages)
+
+### How to setup in Docker
 
 - Install docker
 - go to the project root dir and run
