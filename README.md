@@ -30,6 +30,7 @@ Built with **Nodejs** following the MVC architecture:
 - _JWT_ for logging users
 - an API to get all the data in the website
 - docker to containerise application [how to setup in docker](#how-to-setup-in-docker)
+- redis as a caching layer
 
 ---
 
@@ -43,18 +44,20 @@ Built with **Nodejs** following the MVC architecture:
 - **Alias Routes**: Use alias routes to get the top 5 cheap tours, top 5 tours with high ratings, etc.
 - **Geospatial Queries**: Get tours within a certain distance from a location.
 - **Aggregation Pipelines**: Get statistics like average price, ratings, etc. using MongoDB aggregation pipelines.
-- **JWT Authentication**: Protect routes using JWT authentication.
+- **Controller using factory pattern**: Make factory controllers for get, getAll, Update, Delete
 - **User Roles and Permissions**: Implement user roles and permissions.
-- **Reset Password Functionality**: Implement reset password functionality.
 - **Emailing**: Send welcome emails, password reset emails, etc. (emailing in the prod environment might be slow due to the free tier of service used).
 - **Credit Card Payments**: Handle credit card payments using Stripe.
 - **Mapbox Integration**: Show tour locations on a map using Mapbox.
 - **File Uploads**: Upload and resize images using middleware.
-- **Security**: Implement security best practices.
+- **Rate Limiting**: rate limit api usage to prevent DDOS attacks.
+- **Security**: Implement security best practices against query injection, Cross site scripting, parameter pollution.
 - **Error Handling**: Implement error handling for production.
-- **Environment Variables**: Use environment variables to store sensitive data.
-- **Controller using factory pattern**: Make factory controllers for get, getAll, Update, Delete
-- **Caching layer** using Redis
+- **Caching layer** using Redis, results with load testing
+  - 65% reduction in avg latency
+  - 78% more req/s served
+  - 10% timeouts without, 1.5% timouts with redis under load.
+    <img src='./public/img/load-test.png' alt='load test'>
 
 ### Possible improvements
 
@@ -62,9 +65,8 @@ Built with **Nodejs** following the MVC architecture:
 - Implement logging using Winston or a similar service.
 - Write unit and integration tests.
 - Setup CI to test codebase on PR level.
-- Move deployment to a combination of Docker Registry(auto build and push, CD)
-- EC2 or a similar compute service to run the deployed solution.
-- Move to/fix problems with payments+ emailing solution
+- Move deployment to a combination of Docker Registry(auto build and push, CD) and EC2 or a similar compute service to run the deployed solution.
+- Scaling with clusters, load balancer to improve load performace.
 - Move the frontend to some framework (candidates should have SSG for home & tour pages, SSR for other pages)
 
 ### How to setup in Docker
