@@ -36,6 +36,7 @@ Built with **Nodejs** following the MVC architecture:
 
 ### Interesting features:
 
+- **Rate Limiting**: rate limit api usage to prevent DDOS.
 - **Advanced Filtering**: Filter tours by duration, ratings, price, etc.
 - **Pagination**: Limit the number of results returned.
 - **Sorting**: Sort tours by price, ratings, etc.
